@@ -1,0 +1,39 @@
+---
+1. Buat view nilai_ipk yang diambil dari tabel nilai_mahasiswa. View ini terdiri dari kolom nim, nama, dan IPK. Tampilan akhir view adalah sebagai berikut:
+
+   Jawab:
+   CREATE VIEW nilai_ipk as
+   SELECT nim, nama, ROUND((SUM(semester_1)+SUM(semester_2)+SUM(semester_3))/3, 2) as IPK FROM nilai_mahasiswa GROUP BY nim;
+
+
+---
+2. Buat view kedua dengan nama nilai_ipk_format. Isi view ini diambil dari view nilai_ipk. Tampilan akhir view adalah sebagai berikut:
+
+   Jawab:
+   CREATE OR REPLACE VIEW nilai_ipk_format as
+   	SELECT CONCAT(nama, ' (',IPK,')') as 'Nama dan IPK'
+   	FROM nilai_ipk
+   	ORDER BY IPK DESC;
+
+
+---
+3. Input 1 baris baru ke dalam tabel nilai_mahasiswa, kemudian periksa isi view nilai_ipk dan nilai_ipk_format. Data baru yang diinput boleh sembarang. Pastikan isi view juga langsung terupdate dengan penambahan data ini.
+
+   Jawab:
+   Ya, isi view nilai_ipk dan nilai_ipk_format juga langsung terupdate
+
+
+---
+4. Tampilkan mahasiswa yang namanya diawali dengan huruf R. Data ini diambil dari view nilai_ipk_format. Berikut tampilan akhir yang diiginkan:
+
+   Jawab:
+   SELECT * FROM nilai_ipk_format
+   WHERE `Nama dan IPK` LIKE 'R%';
+
+
+---
+5. Hapus view nilai_ipk dan nilai_ipk_format.
+ 
+   Jawab:
+   DROP VIEW niomic.nilai_ipk;
+   DROP VIEW niomic.nilai_ipk_format;
